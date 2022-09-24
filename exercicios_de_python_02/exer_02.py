@@ -10,4 +10,9 @@ alvoy = float(input('Digite a coordenada y do alvo: '))
 tirox = float(input('Digite a coordenada x do tiro: '))
 tiroy = float(input('Digite a coordenada y do tiro: '))
 
-area_alvo = ()
+distancia = ((alvox - tirox)**2 + (alvoy - tiroy)**2)**0.5
+
+if distancia <= 5:
+    print('Seu disparo acertou o alvo!!!')
+else:
+    print('Você errou!!!')

@@ -1,5 +1,6 @@
 import sys
 import pygame
+import random
 
 # inicializacao basica
 pygame.init()
@@ -15,9 +16,16 @@ VELOCIADADE_DO_RECT_2 = 10
 # criar uma fonte eh necessario para escrever na tela
 font = pygame.font.SysFont(None, FONT_SIZE)
 
-# variáveis dos caracteres
+# posiçao dos rects
 p1_y = 0
 p2_y = 0
+
+# posiçao dos rects
+bola_vel_abs = 0.5
+bola_x = SCREEN_WIDTH//2
+bola_y = SCREEN_HEIGHT//2
+bola_vy = random.choice([-bola_vel_abs, bola_vel_abs])
+bola_vx = random.choice([-bola_vel_abs, bola_vel_abs])
 
 # contadores do placar
 contador_1 = 0
@@ -64,26 +72,35 @@ while True:
             if p2_y >= 0:
                 p2_y -= 1*VELOCIADADE_DO_RECT_1
 
+    bola_x = bola_x + bola_vx
+    bola_y = bola_y + bola_vy
+
+    if bola_x < 0 or bola_x > SCREEN_WIDTH:
+        bola_vx = -bola_vx
+
+    if bola_y < 0 or bola_y > SCREEN_HEIGHT:
+        bola_vy = -bola_vy
+
     # preenche a tela com branco
     screen.fill((255, 255, 255))
 
     pygame.draw.rect(
         surface=screen,
-        color=(0, 0, 0),
+        color=BLACK,
         rect=(0, p1_y, 25, 100),
         width=0
     )
     pygame.draw.rect(
         surface=screen,
-        color=(0, 0, 0),
+        color=BLACK,
         rect=(SCREEN_WIDTH - 25, p2_y, SCREEN_WIDTH, 100),
         width=0
     )
 
     pygame.draw.circle(
         surface=screen,
-        color=(0, 0, 0),
-        center=(SCREEN_WIDTH//2, SCREEN_HEIGHT//2),
+        color=BLACK,
+        center=(bola_x, bola_y),
         radius=5,
         width=0
     )

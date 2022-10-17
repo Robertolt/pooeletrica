@@ -72,21 +72,23 @@ class Bola:
         x, y = self.posicao
         novo_x = x + self.velocidade_x
         self.posicao = (novo_x, y)
-        if (novo_x < 0) or (novo_x > ConfigJogo.LARGURA_TELA):
-            self.velocidade_x = - ConfigJogo.VELOCIDADE_BOLA
+        if (0 >= novo_x) or (novo_x >= ConfigJogo.LARGURA_TELA):
+            self.velocidade_x = - self.velocidade_x
 
     def atualizar_posicao_y(self):
         x, y = self.posicao
         novo_y = y + self.velocidade_y
         self.posicao = (x, novo_y)
-        if (novo_y < 0) or (novo_y > ConfigJogo.LARGURA_TELA):
-            self.velocidade_y = - ConfigJogo.VELOCIDADE_BOLA
+        if (0 >= novo_y) or (novo_y >= ConfigJogo.ALTURA_TELA):
+            self.velocidade_y = -self.velocidade_y
 
     def desenha(self, tela):
+        x = self.posicao[0]
+        y = self.posicao[1]
         pygame.draw.circle(
             surface=tela,
             color=ConfigJogo.COR_BOLA,
-            center=ConfigJogo.POS_INICIAL_BOLA,
+            center=(x, y),
             radius=5,
             width=0
         )
@@ -146,7 +148,7 @@ class Jogo:
             self.barra_direita.parar()
 
         # velocidade da bola
-        if pygame.key.get_pressed()[pygame.K_w]:
+        for _ in pygame.event.get():
             self.bola.mover_em_x()
             self.bola.mover_em_y()
 

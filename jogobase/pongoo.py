@@ -15,6 +15,7 @@ class ConfigJogo:
     POS_INICIAL_BARRA_ESQUERDA = (0.1 * LARGURA_TELA)
     POS_INICIAL_BARRA_DIREITA = (0.9 * LARGURA_TELA - LARGURA_BARRA)
     POS_INICIAL_BOLA = (LARGURA_TELA // 2, ALTURA_TELA // 2)
+    TAMANHO_FONTE = 48
 
 
 class Barra:
@@ -53,6 +54,7 @@ class Barra:
 
 
 class Bola:
+
     def __init__(self, posicao):
         self.posicao = posicao
         self.velocidade_x = 0
@@ -82,6 +84,13 @@ class Bola:
         if (0 >= novo_y) or (novo_y >= ConfigJogo.ALTURA_TELA):
             self.velocidade_y = -self.velocidade_y
 
+    def colisao_esqueda(self):
+        x, y = self.posicao
+        posicao_x, posicao_y = Bola.__init__(self, posicao=self.posicao).posicao
+        if (x == posicao_x) and ((y >= posicao_y) and
+                                 (y <= posicao_y + ConfigJogo.ALTURA_BARRA)):
+            self.velocidade_x = -self.velocidade_x
+
     def desenha(self, tela):
         x = self.posicao[0]
         y = self.posicao[1]
@@ -96,6 +105,11 @@ class Bola:
 
 class EstadoJogo:
     # placar
+    def placar(self, tela):
+        font = pygame.font.SysFont(None, ConfigJogo.TAMANHO_FONTE)
+        text_img = font.render(f'{contador_1} x {contador_2}', True, (0, 0, 0))
+        tela.blit(text_img, (ConfigJogo.LARGURA_TELA // 2 - 40, 40))
+
     # tempo de partida
     pass
 
@@ -119,6 +133,8 @@ class Jogo:
         self.bola = Bola(posicao=ConfigJogo.POS_INICIAL_BOLA)
 
     def rodar(self):
+        self.bola.mover_em_x()
+        self.bola.mover_em_y()
         while True:
             self.tratamento_eventos()
             self.atualiza_estado()
@@ -147,16 +163,12 @@ class Jogo:
         else:
             self.barra_direita.parar()
 
-        # velocidade da bola
-        for _ in pygame.event.get():
-            self.bola.mover_em_x()
-            self.bola.mover_em_y()
-
     def atualiza_estado(self):
         self.barra_esquerda.atualizar_posicao()
         self.barra_direita.atualizar_posicao()
         self.bola.atualizar_posicao_x()
         self.bola.atualizar_posicao_y()
+        self.bola.colisao_esqueda()
 
     def desenha(self):
         self.tela.fill((255, 255, 255))

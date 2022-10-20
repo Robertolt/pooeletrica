@@ -104,8 +104,15 @@ class Bola:
 
 
 class EstadoJogo:
-    # placar
     def placar(self, tela):
+        contador_1 = 0
+        contador_2 = 0
+        if Bola.atualizar_posicao_y(self)[1] >= 0:
+            contador_1 += 1
+        elif Bola.__init__(self, self.posicao)[1] >= ConfigJogo.LARGURA_TELA:
+            contador_2 += 1
+        else:
+            pass
         font = pygame.font.SysFont(None, ConfigJogo.TAMANHO_FONTE)
         text_img = font.render(f'{contador_1} x {contador_2}', True, (0, 0, 0))
         tela.blit(text_img, (ConfigJogo.LARGURA_TELA // 2 - 40, 40))

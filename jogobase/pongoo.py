@@ -84,11 +84,11 @@ class Bola:
         if (0 >= novo_y) or (novo_y >= ConfigJogo.ALTURA_TELA):
             self.velocidade_y = -self.velocidade_y
 
-    def colisao_esqueda(self):
-        x, y = self.posicao
-        posicao_x, posicao_y = Bola.__init__(self, posicao=self.posicao).posicao
-        if (x == posicao_x) and ((y >= posicao_y) and
-                                 (y <= posicao_y + ConfigJogo.ALTURA_BARRA)):
+    def colisao_esqueda(self, barra):
+        x_bola, y_bola = self.posicao
+        x_barra, y_barra = barra.posicao
+        if (x_bola == x_barra) and ((y_bola >= y_barra) and
+                                    (y_bola <= y_barra + ConfigJogo.ALTURA_BARRA)):
             self.velocidade_x = -self.velocidade_x
 
     def desenha(self, tela):
@@ -104,17 +104,18 @@ class Bola:
 
 
 class EstadoJogo:
-    def placar(self, tela):
-        contador_1 = 0
-        contador_2 = 0
-        if Bola.atualizar_posicao_y(self)[1] >= 0:
-            contador_1 += 1
-        elif Bola.__init__(self, self.posicao)[1] >= ConfigJogo.LARGURA_TELA:
-            contador_2 += 1
-        else:
-            pass
+    def __init__(self):
+        self.contador_1 = 0
+        self.contador_2 = 0
+
+    def placar(self, tela, bola):
+        if bola.posicao[1] <= 0:
+            self.contador_1 += 1
+        elif bola.posicao[1] >= ConfigJogo.LARGURA_TELA:
+            self.contador_2 += 1
+
         font = pygame.font.SysFont(None, ConfigJogo.TAMANHO_FONTE)
-        text_img = font.render(f'{contador_1} x {contador_2}', True, (0, 0, 0))
+        text_img = font.render(f'{self.contador_1} x {self.contador_2}', True, (0, 0, 0))
         tela.blit(text_img, (ConfigJogo.LARGURA_TELA // 2 - 40, 40))
 
     # tempo de partida
@@ -138,6 +139,9 @@ class Jogo:
 
         # Configurações da bola
         self.bola = Bola(posicao=ConfigJogo.POS_INICIAL_BOLA)
+
+        # estado do jogo
+        self.estado = EstadoJogo()
 
     def rodar(self):
         self.bola.mover_em_x()
@@ -175,7 +179,8 @@ class Jogo:
         self.barra_direita.atualizar_posicao()
         self.bola.atualizar_posicao_x()
         self.bola.atualizar_posicao_y()
-        self.bola.colisao_esqueda()
+        self.bola.colisao_esqueda(self.barra_esquerda)
+        self.estado.placar(self.tela, self.bola)
 
     def desenha(self):
         self.tela.fill((255, 255, 255))

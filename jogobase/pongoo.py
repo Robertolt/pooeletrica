@@ -189,7 +189,7 @@ class Jogo:
         self.bola.desenha(self.tela)
         pygame.display.flip()
 
-
+k
 def main():
     jogo = Jogo()
     jogo.rodar()

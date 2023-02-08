@@ -51,8 +51,8 @@ class Funcionario:
 def main():
     lista = []
     comandos = input('').split()
-    f = Funcionario
-
+    f = Funcionario(comandos[0], float(comandos[1]), float(comandos[2]), comandos[3])
+    print(f'Salario de {comandos[0]}: {f.salario():.2f}')
 
 
 if __name__ == "__main__":

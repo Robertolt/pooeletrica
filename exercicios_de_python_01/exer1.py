@@ -8,11 +8,12 @@ que ela inicia da posição 0). Se a bola visitar k = 25
 casas, ela irá realizar 2 voltas completas e terminará
 na posição 3.
 """
+numeros = input('')
+n = int(numeros.split()[0])
+k = int(numeros.split()[1])
 
-n = int(input('Digite o tamanho do tabuleiro: '))
-k = int(input('Digite quantas casas a bolinha andou: '))
 
 voltas = k // n
 casas = k % n
 
-print(f'A bolinha deu {voltas} voltas completas e parou na casa {casas}')
+print(voltas, casas)

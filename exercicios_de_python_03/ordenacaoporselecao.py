@@ -8,3 +8,4 @@ encontrado entre as posições i a n, onde n é o tamanho da lista.
 menor elemento na posição 0, o segundo menor na posição 1, o terceiro menor na posição 2 e assim
 por diante. Este algoritmo de ordenação é chamado de ordenação por seleção.
 '''
+

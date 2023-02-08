@@ -7,8 +7,7 @@ sist = float(input(''))
 nota = float(input(''))
 freq = float(input(''))
 
-if ((nota >= 60) or (sist == 1)) and (freq >= 75):
+if (sist == 1) or ((nota >= 60) and (freq >= 75)):
     print(True)
 else:
     print(False)
-  

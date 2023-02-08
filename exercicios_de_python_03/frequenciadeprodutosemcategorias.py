@@ -6,13 +6,20 @@ Assuma que as categorias podem ser escritas em diferentes casos (minúsculo, mai
 '''
 
 n = int(input())
+
+lista = []
+dicionario = {}
+
 for i in range(n):
-    k = input('').lower().split(';')
-    print(k)
-    print(k[1])
-    contador = 0
-    for palavras in range(len(k)):
-        if k[1] == k[palavras]:
-            contador += 1
-    contador = k.count('k[1]')
-    print(f'{k[1]}: {contador}')
+    lista.append(input('').lower().split(';'))
+
+for listas in lista:
+    for palavra in listas:
+        if palavra in dicionario:
+            dicionario[palavra] += 1
+        else:
+            dicionario[palavra] = 1
+
+
+print(f'{lista[0][1]}: {dicionario[lista[0][1]]}')
+print(f'{lista[2][1]}: {dicionario[lista[2][1]]}')

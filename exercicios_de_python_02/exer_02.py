@@ -2,17 +2,20 @@
 se um tiro acertou o alvo. Assuma que o tiro e o alvo são círculos e são conhecidas suas
 posições e raios."""
 
-print('Esse é o jogo do tiro! O raio do tiro é de 1 unidade'
-      'e o raio do alvo é de 4 unidades!')
-alvox = float(input('Digite a coordenada x do alvo: '))
-alvoy = float(input('Digite a coordenada y do alvo: '))
 
-tirox = float(input('Digite a coordenada x do tiro: '))
-tiroy = float(input('Digite a coordenada y do tiro: '))
+alvox = float(input(''))
+alvoy = float(input(''))
+raio = float(input(''))
+
+
+tirox = float(input(''))
+tiroy = float(input(''))
+raio2 = float(input(''))
 
 distancia = ((alvox - tirox)**2 + (alvoy - tiroy)**2)**0.5
 
-if distancia <= 5:
-    print('Seu disparo acertou o alvo!!!')
+if distancia <= (raio + raio2):
+    print(True)
 else:
-    print('Você errou!!!')
+    print(False)
+

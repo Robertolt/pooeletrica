@@ -3,25 +3,23 @@ números das sequências abaixo. Faça versões dos programas usando for e while
 0, 1, 2, 3, 4, 5
 5, 4, 3, 2, 1, 0
 7, 9, 11, 13, 15, 17, 19
-21, 18, 15, 12, 9
-3, 4, 6, 7, 9, 10, 12, 13, 15, 16"""
+21, 18, 15, 12, 9"""
 
-digito = int(input('Digite até onde devo te mostrar a sequência: '))
+digito = int(input(''))
 
 # primeira sequência
 
 
-for i in range(digito):
+pa = 0 + (digito - 1)
+for i in range(0, pa):
     print(i, end=', ')
-
-print(digito)
+print(pa)
 
 # segunda sequencia
-
-for i in range(digito, 0, -1):
+pa = 5 + (digito - 1)*(-1)
+for i in range(5, pa, -1):
     print(i, end=', ')
-
-print(0)
+print(pa)
 
 # terceira seq
 
@@ -37,5 +35,5 @@ for i in range(21, pa, -3):
     print(i, end=', ')
 print(pa)
 
-# quinta sequ
+
 

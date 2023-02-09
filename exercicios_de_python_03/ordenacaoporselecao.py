@@ -9,20 +9,25 @@ menor elemento na posição 0, o segundo menor na posição 1, o terceiro menor 
 por diante. Este algoritmo de ordenação é chamado de ordenação por seleção.
 '''
 
+lista = input().split()
+lista2 = []
+for b in range(len(lista)):
+    lista2.append(float(lista[b]))
+
 
 def organizador(n):
     for i in range(len(n)):
-        menor = i
+        inicio = i
         for k in range(i + 1, len(n)):
-            if n[k] < n[menor]:
-                menor = k
-        if n[i] != n[menor]:
+            if n[k] < n[inicio]:
+                inicio = k
+        if n[i] != n[inicio]:
             lista_aux = n[i]
-            n[i] = n[menor]
-            n[menor] = lista_aux
-    for l in range(len(n)):
-        print(f'{float(n[l]):.2f}', end=' ')
+            n[i] = n[inicio]
+            n[inicio] = lista_aux
+
+    for elementos in range(len(n)):
+        print(f'{float(n[elementos]):.2f}', end=' ')
 
 
-organizador(n=input().split())
-
+organizador(lista2)

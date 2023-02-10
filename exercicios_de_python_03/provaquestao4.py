@@ -13,8 +13,16 @@ pares_ordenated = []
 
 for _ in range(n):
     pares_ordenated.append(input().split())
+print(pares_ordenated)
+for coord in range(len(pares_ordenated)):
+    x = float(pares_ordenated[coord][0])
+    y = float(pares_ordenated[coord][1])
+    for i in range(len(pares_ordenated)):
+        xi = float(pares_ordenated[i][0])
+        yi = float(pares_ordenated[i][1])
+        if (x - xi) and (y - yi) == 0:
+            pass
+        else:
 
-for i in range(len(pares_ordenated)):
-    for p in range(i+1, len(pares_ordenated)):
-        x = pares_ordenated[i][0]
-        y = pares_ordenated[i][1]
+
+

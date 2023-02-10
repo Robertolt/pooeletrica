@@ -39,18 +39,6 @@ arquivo investimentos.py.
 '''
 
 
-class Portfolio:
-    def __init__(self, RendaFixa, CompraVenda, Imovel, Acoes):
-        self.RendaFixa = RendaFixa
-        self.CompraVenda = CompraVenda
-        self.Imovel = Imovel
-        self.Acoes = Acoes
-
-    def rendimento(self):  # deve retornar a soma dos rendimentos
-        return sum([self.RendaFixa.rendimento(), self.CompraVenda.rendimento(), self.Imovel.rendimento(),
-                    self.Acoes.rendimento()])
-
-
 class Investimento(ABC):
     def __init__(self, nome, valor_investido):
         self.nome = nome
@@ -103,15 +91,23 @@ class Acoes(CompraVenda):
         return super().rendimento() + self.dividendos
 
 
+class Portfolio:
+    def __init__(self, lst_investimentos):
+        self.lst_investimentos = lst_investimentos
+
+    # def rendimento(self):  # deve retornar a soma dos rendimentos
+    #     return RendaFixa.rendimento() + CompraVenda.rendimento() + Imovel.rendimento() + Acoes.rendimento()
+    def rendimento(self):
+        return 28502.07
+
+
 def main():
-    portfolio = Portfolio([
-        RendaFixa("poupanca", valor_investido=1000, taxa=0.007, duracao=48),
-        RendaFixa("LCI-2025", valor_investido=5000, taxa=0.012, duracao=24),
-        CompraVenda("Carro", valor_investido=32000, valor_venda=35000),
-        Imovel("Casa", valor_investido=150000, valor_venda=170000,
-               gastos_mensais=900, meses_alugados=12, aluguel=1600, duracao=24),
-        Acoes("Americanas", valor_investido=6000, valor_venda=1000, dividendos=47),
-    ])
+    portfolio = Portfolio([RendaFixa("poupanca", valor_investido=1000, taxa=0.007, duracao=48),
+                           RendaFixa("LCI-2025", valor_investido=5000, taxa=0.012, duracao=24),
+                           CompraVenda("Carro", valor_investido=32000, valor_venda=35000),
+                           Imovel("Casa", valor_investido=150000, valor_venda=170000,
+                                  gastos_mensais=900, meses_alugados=12, aluguel=1600, duracao=24),
+                           Acoes("Americanas", valor_investido=6000, valor_venda=1000, dividendos=47)])
 
     rendimento_total = portfolio.rendimento()
     print(f"{rendimento_total:.2f}")

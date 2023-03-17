@@ -23,6 +23,6 @@ for coord in range(len(pares_ordenated)):
         if (x - xi) and (y - yi) == 0:
             pass
         else:
-
+            pass
 
 
